@@ -12,20 +12,21 @@
         <Entry x:Name="newPerson"
                Placeholder="Enter name" />
 
-        
+      
         <Button Text="Add Person"
                 Grid.Row="1"
                 Clicked="OnNewButtonClicked" />
 
+        
         <Label x:Name="statusMessage"
                TextColor="{StaticResource Primary}"
                Grid.Row="2" />
 
+        
         <Button Text="Get All People"
                 Grid.Row="3"
                 Clicked="OnGetButtonClicked" />
 
-        
         <ListView x:Name="peopleList" Grid.Row="4" ItemTapped="OnPersonTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Person">
