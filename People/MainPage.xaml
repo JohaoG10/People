@@ -9,42 +9,64 @@
           RowDefinitions="Auto,Auto,Auto,Auto,*">
 
        
-        <Entry x:Name="newPerson"
+        <Entry x:Name="JGavilanes_NewPerson"
                Placeholder="Enter name" />
 
-      
-        <Button Text="Add Person"
+        
+        <Button Text="Añadir"
                 Grid.Row="1"
+                x:Name="JGavilanes_AddButton"
                 Clicked="OnNewButtonClicked" />
 
         
-        <Label x:Name="statusMessage"
+        <Label x:Name="JGavilanes_StatusMessage"
                TextColor="{StaticResource Primary}"
                Grid.Row="2" />
 
-        
-        <Button Text="Get All People"
+       
+        <Button Text="Obtener listado personas"
                 Grid.Row="3"
+                x:Name="JGavilanes_GetButton"
                 Clicked="OnGetButtonClicked" />
 
-        <ListView x:Name="peopleList" Grid.Row="4" ItemTapped="OnPersonTapped">
+       
+        <ListView x:Name="JGavilanes_PeopleList" 
+                  Grid.Row="4" 
+                  ItemTapped="OnPersonTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Person">
                     <ViewCell>
                         <Grid Padding="5" ColumnDefinitions="*,2*">
-                            <Label Text="{Binding Name}" TextColor="{StaticResource Primary}" />
+                            <Label x:Name="JGavilanes_Label"
+                                   Text="{Binding Name}" 
+                                   TextColor="{StaticResource Primary}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-
-        <Frame Grid.Row="5" BorderColor="Gray" CornerRadius="10" Padding="10" BackgroundColor="White" HeightRequest="200" HorizontalOptions="Center">
+        <Frame Grid.Row="5" 
+               BorderColor="Gray" 
+               CornerRadius="10" 
+               Padding="10" 
+               BackgroundColor="White" 
+               HeightRequest="200" 
+               HorizontalOptions="Center">
             <StackLayout>
-                <Image Source="johao.jpg" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" />
-                <Label Text="Johao Gavilanes" FontSize="Medium" HorizontalOptions="Center" />
-                <Label Text="Edad: 22 años" FontSize="Small" HorizontalOptions="Center" />
+                <Image x:Name="JGavilanes_Image" 
+                       Source="johao.jpg" 
+                       HeightRequest="100" 
+                       WidthRequest="100" 
+                       HorizontalOptions="Center" />
+                <Label x:Name="JGavilanes_NameLabel" 
+                       Text="Johao Gavilanes" 
+                       FontSize="Medium" 
+                       HorizontalOptions="Center" />
+                <Label x:Name="JGavilanes_AgeLabel" 
+                       Text="Edad: 22 años" 
+                       FontSize="Small" 
+                       HorizontalOptions="Center" />
             </StackLayout>
         </Frame>
 

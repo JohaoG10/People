@@ -1,6 +1,5 @@
 ﻿using People.Models;
 using System.Collections.Generic;
-using Microsoft.Maui.Controls;
 
 namespace People;
 
@@ -11,50 +10,55 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    
+   
     public void OnNewButtonClicked(object sender, EventArgs args)
     {
-        statusMessage.Text = "";
+        JGavilanes_StatusMessage.Text = "";
 
-        App.PersonRepo.AddNewPerson(newPerson.Text);
-        statusMessage.Text = App.PersonRepo.StatusMessage;
-    }
-
-  
-    public void OnGetButtonClicked(object sender, EventArgs args)
-    {
-        statusMessage.Text = "";
-
-        List<Person> people = App.PersonRepo.GetAllPeople();
-        peopleList.ItemsSource = people;
-
-        if (people.Count == 0)
+        
+        if (!string.IsNullOrWhiteSpace(JGavilanes_NewPerson.Text))
         {
-            statusMessage.Text = "No se encontraron personas.";
+            App.PersonRepo.AddNewPerson(JGavilanes_NewPerson.Text);
+            JGavilanes_StatusMessage.Text = App.PersonRepo.StatusMessage;
+            JGavilanes_NewPerson.Text = ""; 
+        }
+        else
+        {
+            JGavilanes_StatusMessage.Text = "Por favor, ingrese un nombre válido.";
         }
     }
 
-   
+    
+    public void OnGetButtonClicked(object sender, EventArgs args)
+    {
+        JGavilanes_StatusMessage.Text = "";
+
+        List<Person> people = App.PersonRepo.GetAllPeople();
+        JGavilanes_PeopleList.ItemsSource = people;
+    }
+
+    
     public async void OnPersonTapped(object sender, ItemTappedEventArgs e)
     {
-        var person = e.Item as Person;
-        if (person != null)
-        {
-            
-            bool confirm = await DisplayAlert("Eliminar Registro",
-                $"{person.Name} acaba de eliminar un registro.",
-                "Eliminar",
-                "Cancelar");
+        var selectedPerson = e.Item as Person;
 
-            if (confirm)
+        if (selectedPerson != null)
+        {
+            bool deleteConfirmed = await DisplayAlert(
+                "Confirmar eliminación",
+                $"{selectedPerson.Name} acaba de eliminar un registro.",
+                "Sí", "No");
+
+            if (deleteConfirmed)
             {
                 
-                App.PersonRepo.DeletePerson(person.Id);
+                App.PersonRepo.DeletePerson(selectedPerson.Id);
+                JGavilanes_StatusMessage.Text = $"{selectedPerson.Name} ha sido eliminado.";
 
-                List<Person> updatedPeople = App.PersonRepo.GetAllPeople();
-                peopleList.ItemsSource = updatedPeople;
+                OnGetButtonClicked(sender, e);
             }
         }
     }
+
 }
 
