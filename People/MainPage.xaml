@@ -8,31 +8,44 @@
     <Grid Padding="5" RowSpacing="5" ColumnSpacing="5"
           RowDefinitions="Auto,Auto,Auto,Auto,*">
 
+       
         <Entry x:Name="newPerson"
-           Placeholder="Enter name" />
+               Placeholder="Enter name" />
 
+        
         <Button Text="Add Person"
-            Grid.Row="1"
-            Clicked="OnNewButtonClicked" />
+                Grid.Row="1"
+                Clicked="OnNewButtonClicked" />
 
         <Label x:Name="statusMessage"
-           TextColor="{StaticResource Primary}"
-           Grid.Row="2" />
+               TextColor="{StaticResource Primary}"
+               Grid.Row="2" />
 
         <Button Text="Get All People"
-            Grid.Row="3"
-            Clicked="OnGetButtonClicked" />
+                Grid.Row="3"
+                Clicked="OnGetButtonClicked" />
 
-        <CollectionView x:Name="peopleList" Grid.Row="4">
-            <CollectionView.ItemTemplate>
+        
+        <ListView x:Name="peopleList" Grid.Row="4" ItemTapped="OnPersonTapped">
+            <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Person">
-                    <Grid ColumnDefinitions="*,2*">
-                        <Label Text="{Binding Id}" TextColor="{StaticResource Primary}"/>
-                        <Label Grid.Column="1" Text="{Binding Name}" TextColor="{StaticResource Primary}"/>
-                    </Grid>
+                    <ViewCell>
+                        <Grid Padding="5" ColumnDefinitions="*,2*">
+                            <Label Text="{Binding Name}" TextColor="{StaticResource Primary}" />
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Frame Grid.Row="5" BorderColor="Gray" CornerRadius="10" Padding="10" BackgroundColor="White" HeightRequest="200" HorizontalOptions="Center">
+            <StackLayout>
+                <Image Source="johao.jpg" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" />
+                <Label Text="Johao Gavilanes" FontSize="Medium" HorizontalOptions="Center" />
+                <Label Text="Edad: 22 años" FontSize="Small" HorizontalOptions="Center" />
+            </StackLayout>
+        </Frame>
 
     </Grid>
 
